@@ -1,4 +1,5 @@
-﻿using Application.Features.Models.Dtos;
+﻿using Application.Features.Models.Commands.CreateModel;
+using Application.Features.Models.Dtos;
 using Application.Features.Models.Models;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -14,5 +15,7 @@ public class MappingProfiles : Profile
             .ForMember(c => c.BrandName, opt => opt.MapFrom(c => c.Brand.Name))
             .ReverseMap();
         CreateMap<IPaginate<Model>, ModelListModel>().ReverseMap();
+        CreateMap<Model, CreateModelDto>().ReverseMap();
+        CreateMap<Model, CreateModelCommand>().ReverseMap();
     }
 }

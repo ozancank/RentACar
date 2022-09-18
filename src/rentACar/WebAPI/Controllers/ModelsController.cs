@@ -1,4 +1,5 @@
-﻿using Application.Features.Models.Models;
+﻿using Application.Features.Models.Commands.CreateModel;
+using Application.Features.Models.Models;
 using Application.Features.Models.Queries.GetListModel;
 using Application.Features.Models.Queries.GetListModelByDynamic;
 using Core.Application.Requests;
@@ -25,6 +26,13 @@ namespace WebAPI.Controllers
             GetListModelByDynamicQuery getListModelByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
             ModelListModel result = await Mediator.Send(getListModelByDynamicQuery);
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] CreateModelCommand createModelCommand)
+        {
+            var result = await Mediator.Send(createModelCommand);
+            return Created("", result);
         }
     }
 }
