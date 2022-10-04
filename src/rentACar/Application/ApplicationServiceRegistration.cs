@@ -1,5 +1,7 @@
-﻿using Application.Features.Brands.Rules;
+﻿using Application.Features.Auths.Rules;
+using Application.Features.Brands.Rules;
 using Application.Features.Models.Rules;
+using Application.Services.AuthService;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using MediatR;
@@ -18,8 +20,11 @@ public static class ApplicationServiceRegistration
 
         services.AddScoped<BrandBusinessRules>();
         services.AddScoped<ModelBusinessRules>();
+        services.AddScoped<AuthBusinessRules>();
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
+        services.AddScoped<IAuthService, AuthManager>();
 
         return services;
     }
